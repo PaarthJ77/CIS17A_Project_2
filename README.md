@@ -239,6 +239,7 @@ public:
 
 ## UML Diagram
 
-![BATTLESHIPML](BATTLESHIPML.png)
+![BATTLESHIPUML](BATTLESHIPUML.png)
+
 
 
