@@ -40,7 +40,7 @@ private:
 public:
     // Constructors
     Game();
-    Game(const Game& other); 
+    Game(const Game& other); // Copy Constructor
 
     // Destructor
     ~Game();
