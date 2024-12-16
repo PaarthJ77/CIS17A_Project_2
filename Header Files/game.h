@@ -1,55 +1,68 @@
+
 #ifndef GAME_H
 #define GAME_H
 
-#include <string>
-
-// Enumerations
-enum Orientation { HORIZONTAL, VERTICAL };
-enum CellStatus { WATER, SHIP, HIT, MISS };
-
-// Constants
-const int BOARD_SIZE = 10;
-const int MAX_SHIPS = 5;
-const int MAX_NAME_LENGTH = 50;
-const std::string SAVE_FILE = "battleship_save.bin";
-const std::string HIGH_SCORE_FILE = "highscores.bin";
-
-class Board; // Forward declaration
-
+#include "common.h"
+#include "player.h"
+#include "board.h"
+#include "highscore.h"
+#include "saveloadmanager.h"
+#include "inputhandler.h"
+#include "OutputHandler.h"      
+#include "menu.h"
+#include "scoremanager.h"
+#include "logger.h"
+#include "TestSuite.h"          
+#include "gameexception.h"
+#include <thread>
 #include <mutex>
-
+#include <memory>
+// Game class
 class Game {
 private:
-    std::string playerName;
-    Board* board;
+    Player player;
+    Board board;
+    ScoreManager scoreManager;
+    SaveLoadManager saveLoadManager;
+    InputHandler inputHandler;
+    OutputHandler outputHandler;
+    Menu menu;
+    Logger logger;
+    TestSuite testSuite;
+
     bool exitGame;
-    std::mutex mtx; // Mutex for thread-safe operations
+    std::mutex mtx; // For thread-safe operations
+    std::thread autosaveThread;
+
+    // Static member
+    static int gameCount;
 
 public:
+    // Constructors
     Game();
+    Game(const Game& other); 
+
+    // Destructor
     ~Game();
 
+    // Assignment Operator
+    Game& operator=(const Game& other);
+
+    // Overloaded Operators
+    bool operator==(const Game& other) const;
+
+    // Member functions
     void run();
     void startNewGame();
     void loadGameState();
     void viewHighScores();
     void resetGame();
     void runTests();
-
-    void displayInstructions();
-    void getPlayerNameInput();
-    void getAttackCoordinatesInput(int* row, int* col);
-
-    void saveGame();
-    bool loadGame();
-
-    void updateHighScores(int moves);
-    void displayHighScores();
-
-private:
     void play();
-    int getMenuChoice();
-    void autoSaveThread();
+    void autoSave();
+
+    // Friend classes/functions
+    friend class SaveLoadManager;
 };
 
-#endif 
+#endif // GAME_H

@@ -1,40 +1,53 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include "common.h"
+#include "cell.h"
+#include "ship.h"
+#include "gameexception.h"
+#include <array>
 #include <vector>
 #include <mutex>
-#include "game.h"
-#include "ship.h"
+#include <iostream>
 
 class Board {
 private:
-    CellStatus grid[BOARD_SIZE][BOARD_SIZE];
+    std::array<std::array<Cell, BOARD_SIZE>, BOARD_SIZE> grid;
     std::vector<Ship> ships;
     int shipsRemaining;
     std::mutex mtx;
 
 public:
+    // Constructors
     Board();
+    Board(const Board& other); 
+
+    // Destructor
+    ~Board();
+
+    // Assignment Operator
+    Board& operator=(const Board& other);
+
+    // Overloaded Operators
+    bool operator==(const Board& other) const;
+    friend std::ostream& operator<<(std::ostream& os, const Board& board);
+    friend std::istream& operator>>(std::istream& is, Board& board);
+
+    // Member functions
     void initializeGrid();
     void placeAllShips();
     bool placeShip(int shipIndex, int row, int col, Orientation orientation);
-
     bool attack(int row, int col);
-    bool allShipsSunk() const { return shipsRemaining == 0; }
-
+    bool allShipsSunk() const;
     void displayGrid(bool showShips) const;
-    void displayHitsOnly() const; // Not fully implemented here
+    void displayHitsOnly() const;
 
-    const std::vector<Ship>& getShips() const { return ships; }
-    void setShipsRemaining(int remaining) { shipsRemaining = remaining; }
-    int getShipsRemaining() const { return shipsRemaining; }
+    // Grid access functions
+    std::array<std::array<Cell, BOARD_SIZE>, BOARD_SIZE> getGrid() const;
+    void loadGrid(const std::array<std::array<Cell, BOARD_SIZE>, BOARD_SIZE>& loadedGrid);
 
-    void loadGrid(const CellStatus loadedGrid[BOARD_SIZE][BOARD_SIZE]);
-    void getGrid(CellStatus outGrid[BOARD_SIZE][BOARD_SIZE]) const;
-
-private:
-    bool isValidPlacement(const Ship& ship, int row, int col, Orientation orientation);
-    int getRandomNumber(int min, int max) const;
+    // Getters
+    int getShipsRemaining() const;
 };
 
-#endif 
+#endif // BOARD_H
