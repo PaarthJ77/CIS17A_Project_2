@@ -123,11 +123,11 @@ private:
     std::mutex mtx;
     static int gameCount;
 };
-
+```
 
 ## Player Class
 
-```
+```cpp
 class Player {
 public:
     Player();
@@ -150,8 +150,9 @@ private:
 };
 
 ```
+## Ship Class
 
-```
+```cpp
 class Ship : public GameEntity {
 public:
     Ship();
@@ -183,5 +184,48 @@ private:
     std::vector<bool> hits;
 };
 
+```
+## Board Class
+```cpp
+class Board {
+public:
+    Board();
+    Board(const Board& other);
+    ~Board();
+
+    Board& operator=(const Board& other);
+    bool operator==(const Board& other) const;
+
+    void initializeGrid();
+    void placeAllShips();
+    bool placeShip(int shipIndex, int row, int col, Orientation orientation);
+    bool attack(int row, int col);
+    bool allShipsSunk() const;
+    void displayGrid(bool showShips) const;
+    std::array<std::array<Cell, BOARD_SIZE>, BOARD_SIZE> getGrid() const;
+    void loadGrid(const std::array<std::array<Cell, BOARD_SIZE>, BOARD_SIZE>& loadedGrid);
+
+private:
+    std::array<std::array<Cell, BOARD_SIZE>, BOARD_SIZE> grid;
+    std::vector<Ship> ships;
+    int shipsRemaining;
+    std::mutex mtx;
+};
+```
+
+## Menu Class
+
+```cpp
+class Menu {
+public:
+    Menu();
+    Menu(const Menu& other);
+    ~Menu();
+
+    Menu& operator=(const Menu& other);
+    bool operator==(const Menu& other) const;
+
+    int displayMainMenu() const;
+};
 ```
 
