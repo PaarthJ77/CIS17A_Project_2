@@ -1,6 +1,6 @@
-# **Battleship Game**
+# **Battleship**
 
-Welcome to the **Battleship Game**, a console-based implementation of the classic board game. The game supports creating a new game, saving/loading game states, viewing high scores, and running unit tests.
+Welcome to the **Battleship**, a console-based implementation of the classic board game. The game supports creating a new game, saving/loading game states, viewing high scores, and running unit tests.
 
 ---
 
