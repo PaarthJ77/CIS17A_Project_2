@@ -239,5 +239,6 @@ public:
 
 ## UML Diagram
 
-![Battleship UML Diagram](BATTLESHIPUML.png)
+![BATTLESHIPML](BATTLESHIPML.png)
+
 
