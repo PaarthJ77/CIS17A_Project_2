@@ -124,6 +124,7 @@ private:
     static int gameCount;
 };
 ```
+---
 
 ## Player Class
 
@@ -148,6 +149,8 @@ private:
     std::string name;
     std::array<Ship, MAX_SHIPS> ships;
 };
+
+---
 
 ```
 ## Ship Class
@@ -184,6 +187,8 @@ private:
     std::vector<bool> hits;
 };
 
+---
+
 ```
 ## Board Class
 ```cpp
@@ -213,6 +218,8 @@ private:
 };
 ```
 
+---
+
 ## Menu Class
 
 ```cpp
@@ -228,4 +235,9 @@ public:
     int displayMainMenu() const;
 };
 ```
+---
+
+## UML Diagram
+
+![Battleship UML Diagram](BATTLESHIPUML.png)
 
