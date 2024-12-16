@@ -1,4 +1,4 @@
-# 🕹️ **Battleship Game**
+# **Battleship Game**
 
 Welcome to the **Battleship Game**, a console-based implementation of the classic board game. The game supports creating a new game, saving/loading game states, viewing high scores, and running unit tests.
 
@@ -17,7 +17,7 @@ Welcome to the **Battleship Game**, a console-based implementation of the classi
 
 ---
 
-## 🚀 **Introduction**
+## **Introduction**
 
 This project is a **C++ implementation** of the classic **Battleship** game. The game allows players to place ships, attack positions, and try to sink all enemy ships. It includes features such as saving and loading game states, displaying high scores, and running automated tests.
 
